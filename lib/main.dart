@@ -80,6 +80,10 @@ class _MyHomePageState extends State<MyHomePage> {
     return counterIsEven() ? 'GENAP' : 'GANJIL';
   }
 
+  bool counterIsZero(){
+    return _counter == 0;
+  }
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -126,7 +130,24 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
 
       floatingActionButton:
-          Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+      Padding(
+        padding: const EdgeInsets.all(29.0),
+        child: 
+          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+       
+        // SizedBox(
+        //   height: 10,
+        //   width: 1200,
+        // ),
+        Align(
+            alignment: Alignment.bottomLeft,  
+            child: counterIsZero() ? null : FloatingActionButton(
+              onPressed: _decrementCounter,
+              heroTag: null,
+              tooltip: 'Decrement',
+              child: Icon(Icons.remove),
+            )), 
+        
         Align(
             alignment: Alignment.bottomRight,
             child: FloatingActionButton(
@@ -135,47 +156,8 @@ class _MyHomePageState extends State<MyHomePage> {
               tooltip: 'Increment',
               child: const Icon(Icons.add),
             )),
-        SizedBox(
-          height: 10,
-          width: 1400,
-        ),
-        Align(
-            alignment: Alignment.bottomLeft,
-            child: FloatingActionButton(
-              onPressed: _decrementCounter,
-              heroTag: null,
-              tooltip: 'Decrement',
-              child: const Icon(Icons.remove),
-            ))
-      ]),
-
-      // Stack(
-      //   children: <Widget>[
-      //     Align(
-      //       alignment: Alignment.bottomLeft,
-      //       child: FloatingActionButton(
-      //                 heroTag: null,
-      //                 onPressed: _incrementCounter,
-      //                 tooltip: 'Increment',
-      //                 child: const Icon(Icons.add),
-      //           ),
-      //     Align(
-      //       alignment: Alignment.bottomRight,
-      //       child: FloatingActionButton(
-      //                 heroTag: null,
-      //                 onPressed: _decrementCounter,
-      //                 tooltip: 'Decrement',
-      //                 child: const Icon(Icons.remove),
-      //             ),
-      //     ),
-      //   ],
-      // ),
-
-      // floatingActionButton2  : FloatingActionButton(
-      //   onPressed: _decrementCounter,
-      //   tooltip: 'Decrement',
-      //   child: const Icon(Icons.add),
-      // ), // This trailing comma makes auto-formatting nicer for build methods.
+      ])
+      ),
     );
   }
 }
