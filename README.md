@@ -102,3 +102,130 @@ Text(counterStateString(),
       ),
 
 ```
+
+# Flutter Navbar, Forms, & Data-Routing
+
+## Perbedaan Navigator.push dan Navigator.pushReplacement
+- Navigator.push
+
+source : navigator.dart
+
+Code: 
+```
+@optionalTypeArgs
+static Future<T?> push<T extends Object?>(BuildContext context, Route<T> route) {
+  return Navigator.of(context).push(route);
+
+/// Push a new route onto the navigator that most tightly encloses the
+/// given context.
+}
+```
+
+- Navigator.pushReplacement
+
+Code: 
+
+```
+@optionalTypeArgs
+static Future<T?> pushReplacement<T extends Object?, TO extends Object?>(BuildContext context, Route<T> newRoute, { TO? result }) {
+  return Navigator.of(context).pushReplacement<T, TO>(newRoute, result: result);
+}
+/// Replace the current route of the navigator that most tightly encloses the
+/// given context by pushing a new route and then disposing the previous
+/// route once the new route has finished animating in.
+///
+```
+
+Dari kedua kode di atas, terlihat penjelasan bahwa perbedaan antara keduanya terletak pada proses setelah replacement, dimana pada pushReplacement, rute screen awal yang telah direplace akan langsung dibuang (dipop). Sementara itu, pada push biasa, hal tersebut tidak dilakukan (hanya terjadi push screen agar berada di posisi teratas dalam stack).
+
+## Widget yang dipakai beserta fungsinya
+Widget yang dipakai dalam pengerjaan proyek ini mencakup widget yang telah dijelaskan sebelumnya pada bagian 7. Selain itu, terdapat beberapa widget tambahan, yakni:
+- Card --> untuk membuat cards
+
+- Drawer --> untuk membuat drawer/hamburger yang menjadi tempat menu aplikasi
+
+- ListTile --> widget yang menampung 1-3 baris teks yang secara opsional dapat diapit oleh widget lain
+
+- MaterialPageRoute --> Route modal yang dapat menggantikan screen/page dengan transisi yang adaptif terhadap platform
+
+- Form --> Untuk membuat form
+
+- SingleChildScrollView --> Untuk membuat sebuah widget yang scroll-able.
+
+- TextFormField --> Untuk membuat input field berupa text
+
+- DropdownButton --> Untuk membuat button dropdown
+ 
+- DropdownMenuItem --> Untuk mendefinisikan opsi/pilihan setelah dropdownbutton di tekan
+
+- TextButton --> Untuk membuat button berisi text
+
+
+
+## Jenis-jenis event yang ada pada Flutter 
+- onPressed --> muncul ketika suatu widget ditekan
+
+- onChanged --> muncul ketika suatu widget diubah
+
+- onSaved --> muncul ketika dilakukan proses saving pada widget
+
+Selain ketiga event tersebut, masih terdapat event-event lainnya, dimana kita dapat mendefinisikan handler bagi setiap kemunculan event.
+
+## Cara kerja Navigator dalam "mengganti" halaman dari aplikasi Flutter
+Berdasarkan definisi yang terdapat pada dokumentasi flutter (https://api.flutter.dev/flutter/), navigator merupakan widget yang memanage kumpulan child-widget lain dengan menggunakan konsep stack. Dalam sebuah aplikasi mobile, konten dari sebuah aplikasi dilihat dalam sebuah screen atau halaman. Di dalam Flutter, screen atau halaman tersebut disebut sebagai routes yang dikelola oleh widget Navigator. Sesuai dengan konsep stack, route yang dipush akan ditempatkan di paling atas. Sementara itu, proses popping route juga akan dilakukan melalui elemen yang paling atas (Last In, First Out). 
+
+
+## Langkah Implementasi
+- Menambahkan drawer/hamburger dengan 3 menu, yaitu untuk counter_7, tambah budget, dan data budget dengan pendefinisian widget drawer sebagai berikut:
+
+```
+Drawer(
+      child: Column(
+        children: [
+          // Menambahkan clickable menu
+          ListTile(
+            title: const Text('counter_7'),
+            onTap: () {
+              // Route menu ke halaman utama
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const MyHomePage(title: 'Flutter Demo Home Page')),
+              );
+            },
+          ),
+          ListTile(
+            title: const Text('Tambah budget'),
+            onTap: () {
+              // Route menu ke halaman form
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const MyFormPage()),
+              );
+            },
+          ),
+
+          ListTile(
+            title: const Text('Data budget'),
+            onTap: () {
+              // Route menu ke halaman form
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) =>  MyDataPage()),
+              );
+            },
+          ),
+        ],
+      ),
+    ),
+```
+
+- Menambahkan halaman form dengan kode seperti yang dapat dilihat pada form.dart. Pada form.dart, kita akan mengambil data dari user dan memetakannya ke dalam sebuah variabel yang nantinya dapat diakses oleh aplikasi lainnya.
+
+- Menambahkan halaman data budget sesuai dengan yang dapat dilihat pada data.dart
+
+- Mengintegrasikan setiap halaman dengan melakukan import, sehingga data antaraplikasi dapat tersinkronisasi.
+
+
+
+
+
