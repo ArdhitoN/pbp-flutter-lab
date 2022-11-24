@@ -244,7 +244,7 @@ Beberapa widget tambahan (berdasarkan widget yang dipakai pada tahap 7 & 8) pada
 - Membuat model mywatchlist untuk membuat object berdasarkan data JSON yang akan diambil
 - Membuat fungsi untuk mengkonversi data JSON menjadi object dari model yang telah dibuat sebelumnya, maupun sebaliknya
 - Membuat fetcher dari data JSON sebagaimana yang terdefinisi pada fetcherWatchList.dart (mendapatkan url(http://cata-log.herokuapp.com/mywatchlist/json/) terlebih dahulu dengan method parse dari class Uri, memanggil data dari url dengan method get dari http, data yang diperoleh akan didecode, lalu akan diconvert menjadi object MyWatchList dengan method fromJson yang telah didefinisikan sebelumnya)
-- Membuat halaman My Watch List yang akan menampilkan nama-nama watchlist dari pengguna dengan memanfaatkan FutureBuilder, dimana atribut future berisi fungsi yang akan dijalankan untuk mengambil suatu snapshot, dimana snapshot tersebut akan dipakai sebagai basis untuk mendefinisikan elemen yang akan dibuat yang akan didefinisikan pada atribut builder.
+- Membuat halaman My Watch List yang akan menampilkan nama-nama watchlist dari pengguna dengan memanfaatkan FutureBuilder, dimana atribut future berisi fungsi yang akan dijalankan untuk mengambil suatu snapshot, dimana snapshot tersebut akan dipakai sebagai basis untuk mendefinisikan elemen yang akan dibuat dan didefinisikan pada atribut builder.
 
 
 ## Langkah Implementasi
