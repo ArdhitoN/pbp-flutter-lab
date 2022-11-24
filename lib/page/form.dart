@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:counter_7/main.dart';
-import 'package:counter_7/data.dart';
+import 'package:counter_7/page/data.dart';
+
+import 'package:counter_7/drawer/drawer.dart';
+
 
 List<List> listJawaban = [];
 
@@ -31,46 +34,7 @@ class _MyFormPageState extends State<MyFormPage> {
       appBar: AppBar(
         title: Text('Form'),
       ),
-      drawer: Drawer(
-        child: Column(
-          children: [
-            // Menambahkan clickable menu
-            ListTile(
-              title: const Text('counter_7'),
-              onTap: () {
-                // Route menu ke halaman utama
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          const MyHomePage(title: 'Flutter Demo Home Page')),
-                );
-              },
-            ),
-            ListTile(
-              title: const Text('Tambah budget'),
-              onTap: () {
-                // Route menu ke halaman form
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const MyFormPage()),
-                );
-              },
-            ),
-
-            ListTile(
-              title: const Text('Data budget'),
-              onTap: () {
-                // Route menu ke halaman form
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => MyDataPage()),
-                );
-              },
-            ),
-          ],
-        ),
-      ),
+      drawer: DrawerClass(parentScreen: ScreenName.Form),
       body: Form(
         key: _formKey,
         child: SingleChildScrollView(

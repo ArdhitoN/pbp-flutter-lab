@@ -158,7 +158,7 @@ Widget yang dipakai dalam pengerjaan proyek ini mencakup widget yang telah dijel
  
 - DropdownMenuItem --> Untuk mendefinisikan opsi/pilihan setelah dropdownbutton di tekan
 
-- TextButton --> Untuk membuat button berisi text
+- TextButton --> Untuk membuat button berisi text 
 
 
 
@@ -227,5 +227,31 @@ Drawer(
 
 
 
+# Integrasi Web Service pada Flutter
+
+## Apakah bisa kita melakukan pengambilan data JSON tanpa membuat model terlebih dahulu? Jika iya, apakah hal tersebut lebih baik daripada membuat model sebelum melakukan pengambilan data JSON?
+Ya, hal tersebut dapat dilakukan. Namun, hal tersebut akan membuat program cenderung lebih rumit dan pada akhirnya tingkat keterbacaannya pun akan menurun. Dengan membuat model, code dapat lebih terabstraksi dan teratur (sebagaimana manfaat yang dapat kita peroleh dengan menerapkan Object Oriented Programming). Dengan begitu, pengambilan data dari JSON tanpa membuat model tidak lebih baik daripada membuat model terlebih dahulu untuk membuat object penampung hasil pengambilan data dari JSON.
+
+## Widget yang dipakai pada proyek beserta fungsinya
+Beberapa widget tambahan (berdasarkan widget yang dipakai pada tahap 7 & 8) pada proyek tahap-9 kali ini ialah:
+
+- FutureBuilder --> Widget yang akan terbentuk berdasarkan snapshot hasil interaksi terbaru dengan Future. Widget ini berfungsi untuk mengeksekusi perubahan widget berdasarkan hasil fungsi yang bersifat asinkronus. 
+- CircularProgressIndicator -> Widget yang dapat menggambarkan bahwa suatu proses sedang dilakukan (menampilkan visualisasi loading).
+- MyWatchListPage --> Widget custom yang dibuat untuk menampilkan halaman berisi kumpulan watchlist pengguna.
+- MyWatchListDetail --> Widget custom yang dibuat untuk menampilkan detail dari suatu watchlist.
+
+## Mekanisme pengambilan data dari json hingga dapat ditampilkan pada Flutter
+- Membuat model mywatchlist untuk membuat object berdasarkan data JSON yang akan diambil
+- Membuat fungsi untuk mengkonversi data JSON menjadi object dari model yang telah dibuat sebelumnya, maupun sebaliknya
+- Membuat fetcher dari data JSON sebagaimana yang terdefinisi pada fetcherWatchList.dart (mendapatkan url(http://cata-log.herokuapp.com/mywatchlist/json/) terlebih dahulu dengan method parse dari class Uri, memanggil data dari url dengan method get dari http, data yang diperoleh akan didecode, lalu akan diconvert menjadi object MyWatchList dengan method fromJson yang telah didefinisikan sebelumnya)
+- Membuat halaman My Watch List yang akan menampilkan nama-nama watchlist dari pengguna dengan memanfaatkan FutureBuilder, dimana atribut future berisi fungsi yang akan dijalankan untuk mengambil suatu snapshot, dimana snapshot tersebut akan dipakai sebagai basis untuk mendefinisikan elemen yang akan dibuat yang akan didefinisikan pada atribut builder.
+
+
+## Langkah Implementasi
+- Menambahkan menu My Watch List pada drawer
+- Menyesuaikan setting environment yang diperlukan agar dapat melakukan pengambilan data melalui internet (memanfaatkan package http, setting AndroidManifest.xml, dll)
+- Melakukan pengambilan data dari json hingga dapat ditampilkan pada Flutter sebagaimana yang telah dijelaskan pada bagian sebelumnya
+- Membuat halaman berisi detail dari watch list dengan mendefinisikan stateful widget MyWatchListDetail yang akan menerima argumen berupa object MyWatchList
+- Mengintegrasikan setiap object MyWatchList pada MyWatchListPage dengan detailnya dengan memanfaatkan Widget ListTile beserta atribut onTap-nya.
 
 
